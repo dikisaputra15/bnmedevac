@@ -31,7 +31,7 @@ Route::get('/redirect-to-wp', function (Illuminate\Http\Request $request) {
     $secret = env('JWT_AUTH_SECRET_KEY', 'Chelsea123!@#');
 
     $payload = [
-        'iss' => 'https://id.concordcmt.com',
+        'iss' => 'https://sg.concordcmt.com',
         'iat' => time(),
         'exp' => time() + 60, // Berlaku 1 menit
         'data' => [

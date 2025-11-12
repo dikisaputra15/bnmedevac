@@ -185,7 +185,7 @@
                         <strong>Address:</strong>
                         {{ $hospital->address }},
                         {{ $city->city }},
-                        {{ $province->provinces_region }}, Indonesia
+                        {{ $province->provinces_region }}, Singapore
                     </p>
                     <p>
                         <strong>Latitude:</strong> {{ $hospital->latitude }}
