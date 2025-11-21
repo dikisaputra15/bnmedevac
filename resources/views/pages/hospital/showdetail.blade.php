@@ -185,7 +185,7 @@
                         <strong>Address:</strong>
                         {{ $hospital->address }},
                         {{ $city->city }},
-                        {{ $province->provinces_region }}, Singapore
+                        {{ $province->provinces_region }}, Brunei Darussalam
                     </p>
                     <p>
                         <strong>Latitude:</strong> {{ $hospital->latitude }}
