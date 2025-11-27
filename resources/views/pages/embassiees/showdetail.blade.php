@@ -145,8 +145,11 @@
                 <p>
                     <strong>Longitude:</strong> {{ $embassy->longitude ?? '-' }}
                 </p>
-                 <p>
-                    <strong>Location:</strong> {{ $embassy->location ?? '-' }}
+                <p>
+                    <strong>Location:</strong>
+                    {{ $embassy->location }},
+                    {{ $city->city }},
+                    {{ $province->provinces_region }}, Brunei Darussalam
                 </p>
             </div>
             </div>
