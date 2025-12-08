@@ -180,6 +180,11 @@
                     <img src="https://pg.concordreview.com/wp-content/uploads/2025/01/private-airport.png" style="width:30px; height:30px;">
                     <small>Private</small>
                 </button>
+
+                 <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#">
+                    <img src="https://pg.concordreview.com/wp-content/uploads/2025/11/helipad-removebg.png" style="width:30px; height:30px;">
+                    <small>Helipad</small>
+                </button>
             </div>
 
         </div>
