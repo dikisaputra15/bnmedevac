@@ -222,7 +222,7 @@
                     <div class="col-3 text-info">
                         <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#level1Modal">
                             <img src="https://pg.concordreview.com/wp-content/uploads/2025/01/hospital_pin-tosca.png" style="width:30px; height:30px;">
-                            <small>PUSKESMAS</small>
+                            <small>Clinic / Health Center</small>
                         </button>
                     </div>
                 </div>
@@ -255,7 +255,7 @@
       <div class="modal-header">
          <div class="d-flex align-items-center">
             <img src="https://pg.concordreview.com/wp-content/uploads/2025/01/hospital_pin-tosca.png" style="width:30px; height:30px;">
-            <h5 class="modal-title" id="disclaimerLabel">Public Health Center (PUSKESMAS)</h5>
+            <h5 class="modal-title" id="disclaimerLabel">Clinic / Health Center</h5>
          </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -580,7 +580,7 @@ const FilterPanel = L.Control.extend({
                     @endforeach
                 </select>
                 <label>Facility Level:</label>
-                ${['Class A','Class B','Class C','Class D','Public Health Center (PUSKESMAS)'].map(c => `
+                ${['Class A','Class B','Class C','Class D','Clinic / Health Center'].map(c => `
                     <label style="display:block;font-size:13px;">
                         <input type="checkbox" name="hospitalLevel" value="${c}"> ${c}
                     </label>`).join('')}
