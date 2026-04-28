@@ -3,63 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Airport;
-use App\Models\Hospital;
 use App\Models\Police;
 use App\Models\Provincesregion;
 use App\Models\City;
 use Illuminate\Support\Facades\DB;
-use Exception; // Import Exception for better error handling
+use Exception;
 
-class AirportsController extends Controller
+class PoliceController extends Controller
 {
-    /**
-     * Display a listing of the resource (for the main map page).
-     * This method prepares data for the frontend view.
-     */
-    public function index(Request $request)
+     public function index(Request $request)
     {
         // Using `unique()` and `values()` on collections ensures distinct, sorted results.
         // `filter()` removes null/empty values.
-        $airportNames = Airport::distinct()->pluck('airport_name')->filter()->sort()->values();
-        $airportCategories = Airport::distinct()->pluck('category')->filter()->sort()->values();
-        $airportLocations = Airport::distinct()->pluck('address')->filter()->sort()->values();
+        $policeNames = Police::distinct()->pluck('name_police')->filter()->sort()->values();
+        $policeCategories = Police::distinct()->pluck('category')->filter()->sort()->values();
+        $policeLocations = Police::distinct()->pluck('location')->filter()->sort()->values();
 
         $provinces = Provincesregion::all(); // Get all provinces
 
-        return view('pages.airports.index', compact('provinces', 'airportNames', 'airportCategories', 'airportLocations'));
+        return view('pages.police.index', compact('provinces', 'policeNames', 'policeCategories', 'policeLocations'));
     }
 
-    /**
-     * API endpoint to filter airports based on various criteria, including geofencing.
-     * This method handles the filtering logic for AJAX requests from the map.
-     */
-    public function filter(Request $request)
+     public function filter(Request $request)
     {
-        $query = Airport::query();
+        $query = Police::query();
 
-        $query->where('airport_status', true);
+        $query->where('police_status', true);
 
         // 1. Filter by Airport Name (case-insensitive search)
         $query->when($request->filled('name'), function ($q) use ($request) {
-            $q->where('airport_name', 'like', '%' . $request->input('name') . '%');
+            $q->where('name_police', 'like', '%' . $request->input('name') . '%');
         });
 
         // 2. Filter by Category (case-insensitive search)
-       $query->when($request->filled('categories'), function ($q) use ($request) {
-            $categories = (array) $request->input('categories');
-
-            $q->where(function ($sub) use ($categories) {
-                foreach ($categories as $cat) {
-                    // Cari kategori yang mengandung kata tersebut (case-insensitive)
-                    $sub->orWhere('category', 'like', "%$cat%");
-                }
-            });
+        $query->when($request->filled('category'), function ($q) use ($request) {
+            $q->where('category', $request->input('category'));
         });
 
         // 3. Filter by Location (Address - case-insensitive search)
         $query->when($request->filled('location'), function ($q) use ($request) {
-            $q->where('address', 'like', '%' . $request->input('location') . '%');
+            $q->where('location', 'like', '%' . $request->input('location') . '%');
         });
 
         // 4. Filter by Province IDs
@@ -88,7 +71,7 @@ class AirportsController extends Controller
             $haversine = "(6371 * acos(cos(radians(?)) * cos(radians(latitude))
                             * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude))))";
 
-            $query->selectRaw("airports.*, $haversine AS distance", [
+            $query->selectRaw("police.*, $haversine AS distance", [
                     $centerLat, $centerLng, $centerLat
                 ])
                 ->whereRaw("$haversine < ?", [
@@ -149,99 +132,15 @@ class AirportsController extends Controller
 
 
         // Execute the query and return JSON response
-        $airports = $query->get();
-        return response()->json($airports);
-    }
-
-    // Unchanged methods for other functionalities
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(string $id)
-    {
-        //
-    }
-
-    public function edit(string $id)
-    {
-        //
-    }
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
+        $police = $query->get();
+        return response()->json($police);
     }
 
     public function showdetail($id)
     {
-        $airport = Airport::findOrFail($id);
-        $city = City::findOrFail($airport->city_id);
-        $province = Provincesregion::findOrFail($airport->province_id);
-
-        return view('pages.airports.showdetail', compact('airport', 'city', 'province'));
-    }
-
-    public function showdetailemergency($id)
-    {
-        $airport = Airport::findOrFail($id);
-        $hospital = Hospital::select('medical_support_website')->first();
-
-          // --- Ambil Bandara Terdekat ---
-        $nearbyAirports = Airport::selectRaw('*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) AS distance', [$airport->latitude, $airport->longitude, $airport->latitude])
-            ->having('distance', '<=', 500) // Filter dalam radius 100 km (sesuaikan)
-            ->where('id', '!=', $airport->id) // Jangan sertakan bandara utama itu sendiri
-            ->orderBy('distance')
-            ->get();
-
-        // --- Ambil Rumah Sakit Terdekat ---
-        $nearbyHospitals = Hospital::selectRaw('*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) AS distance', [$airport->latitude, $airport->longitude, $airport->latitude])
-            ->having('distance', '<=', 500) // Filter dalam radius 100 km (sesuaikan)
-            ->orderBy('distance')
-            ->get();
-
-
-        $nearbyPolices = Police::selectRaw("*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ))) AS distance", [$airport->latitude, $airport->longitude, $airport->latitude])
-            ->having('distance', '<=', 500)
-            ->orderBy('distance')
-            ->get();
-
-        $radius_km = 100; // Radius lingkaran untuk ditampilkan di peta
-
-        return view('pages.airports.showdetailemergency', compact('airport', 'nearbyAirports', 'nearbyHospitals', 'radius_km', 'hospital', 'nearbyPolices'));
-    }
-
-    public function showairlinesdestination($id)
-    {
-        $airport = Airport::findOrFail($id);
-        return view('pages.airports.showairlinesdestination', compact('airport'));
-    }
-
-    public function shownavigation($id)
-    {
-        $airport = Airport::findOrFail($id);
-
-           // --- Ambil Bandara Terdekat ---
-        $nearbyAirports = Airport::selectRaw('*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) AS distance', [$airport->latitude, $airport->longitude, $airport->latitude])
-            ->having('distance', '<=', 500) // Filter dalam radius 500 km (sesuaikan)
-            ->where('id', '!=', $airport->id) // Jangan sertakan bandara utama itu sendiri
-            ->orderBy('distance')
-            ->get();
-
-        $radius_km = 500;
-
-        return view('pages.airports.shownavigation', compact('airport','nearbyAirports','radius_km'));
+        $police = Police::findOrFail($id);
+        $city = DB::table('cities')->where('id', $police->city_id)->first();
+        $province = DB::table('provincesregions')->where('id', $police->province_id)->first();
+        return view('pages.police.showdetail', compact('police','city','province'));
     }
 }
