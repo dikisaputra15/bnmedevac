@@ -865,10 +865,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div id="policeFilter" style="display:none;margin-top:8px;">
                     <strong>Police Category:</strong><br>
                     ${[
-                        'Myanmar Police Force (National HQ)',
-                        'State / Region Police Command',
+                        'Royal Brunei Police Force (Police HQ)',
                         'District Police Command',
-                        'Township Police Station'
+                        'Police Station',
+                        'Police Post'
                     ].map(cat => `
                         <label style="display:block;font-size:13px;">
                             <input type="checkbox" name="policeCategory" value="${cat}"> ${cat}
