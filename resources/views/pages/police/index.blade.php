@@ -158,22 +158,22 @@
 
                 <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#level6Modal">
                     <img src="{{ asset('images/dot-blue-ring-royal-papua.png') }}" style="width:15px; height:15px;">
-                    <small>Myanmar Police Force (National HQ)</small>
+                    <small>Royal Brunei Police Force (Police HQ)</small>
                 </button>
 
                 <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#level5Modal">
                     <img src="{{ asset('images/dot-red.png') }}" style="width:15px; height:15px;">
-                    <small>State / Region Police Command</small>
+                    <small>District Police Command</small>
                 </button>
 
                 <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#level4Modal">
                     <img src="{{ asset('images/dot-orange-ppc.png') }}" style="width:15px; height:15px;">
-                    <small>District Police Command</small>
+                    <small>Police Station</small>
                 </button>
 
                 <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#level3Modal">
                     <img src="{{ asset('images/dot-green.png') }}" style="width:15px; height:15px;">
-                    <small>Township Police Station</small>
+                    <small>Police Post</small>
                 </button>
 
             </div>
