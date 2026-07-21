@@ -231,7 +231,7 @@
                     </div>
 
                 <div class="col-md-2 filter-box" id="provinceSelect">
-                    <label class="filter-label">Province</label>
+                    <label class="filter-label">District</label>
                         <div class="select-input">
                             <input
                                 type="text"

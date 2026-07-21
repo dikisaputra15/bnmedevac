@@ -22,7 +22,7 @@
 
          <div class="col-md-12">
             <div class="form-group">
-                <label>Region</label>
+                <label>Edit District</label>
                 <select class="form-control" name="province_id" id="city">
                     <?php
                         foreach ($provinces as $prov) {
@@ -44,7 +44,7 @@
 
         <div class="col-md-12">
             <div class="form-group">
-                <label>Edit Township</label>
+                <label>Edit Mukims (sub-districts)</label>
                 <select class="form-control" name="city" id="city">
                     <?php
                         foreach ($cities as $city) {
@@ -87,7 +87,7 @@
 
         <div class="col-md-12">
             <div class="form-group">
-                <label>Edit Police Level</label><br>
+                <label>Edit Police Classification (Global)</label><br>
 
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="level" value="Layer 1"
@@ -115,62 +115,53 @@
             </div>
         </div>
 
-         <div class="col-md-12">
-            <div class="form-group">
-                <label>Edit Police Classification</label><br>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="classification" value="National HQ"
-                        {{ old('National HQ', $police->classification ?? '') == 'National HQ' ? 'checked' : '' }}>
-                    <label class="form-check-label">National HQ</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="classification" value="Regional / Macro Command"
-                        {{ old('Regional / Macro Command', $police->classification ?? '') == 'Regional / Macro Command' ? 'checked' : '' }}>
-                    <label class="form-check-label">Regional / Macro Command</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="classification" value="Provincial / Territorial Command"
-                        {{ old('Provincial / Territorial Command', $police->classification ?? '') == 'Provincial / Territorial Command' ? 'checked' : '' }}>
-                    <label class="form-check-label">Provincial / Territorial Command</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="classification" value="Local Police Station"
-                        {{ old('Local Police Station', $police->classification ?? '') == 'Local Police Station' ? 'checked' : '' }}>
-                    <label class="form-check-label">Local Police Station</label>
-                </div>
-            </div>
-        </div>
-
         <div class="col-md-12">
             <div class="form-group">
-                <label>Edit Police Category</label><br>
+                <label>Edit Police Classification (Country)</label><br>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="category" value="Royal Brunei Police Force (Police HQ)"
-                        {{ old('Royal Brunei Police Force (Police HQ)', $police->category ?? '') == 'Royal Brunei Police Force (Police HQ)' ? 'checked' : '' }}>
-                    <label class="form-check-label">Royal Brunei Police Force (Police HQ)</label>
+                <input type="hidden" name="icon" id="icon" value="{{ $police->icon }}">
+               <div class="form-check form-check-inline police-option {{ $police->category == 'Royal Brunei Police Force (Police HQ)' ? 'selected' : '' }}">
+                    <input class="form-check-input category-radio"
+                        type="radio"
+                        name="category"
+                        value="Royal Brunei Police Force (Police HQ)"
+                        data-icon="{{ asset('images/Layer1.png') }}"
+                        {{ $police->category == 'Royal Brunei Police Force (Police HQ)' ? 'checked' : '' }}>
+                    <img src="{{ asset('images/Layer1.png') }}" width="16">
+                    <label>Royal Brunei Police Force (Police HQ)</label>
                 </div>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="category" value="District Police Command"
-                        {{ old('District Police Command', $police->category ?? '') == 'District Police Command' ? 'checked' : '' }}>
-                    <label class="form-check-label">District Police Command</label>
+                 <div class="form-check form-check-inline police-option {{ $police->category == 'District Police Command' ? 'selected' : '' }}">
+                    <input class="form-check-input category-radio"
+                        type="radio"
+                        name="category"
+                        value="District Police Command"
+                        data-icon="{{ asset('images/Layer2.png') }}"
+                        {{ $police->category == 'District Police Command' ? 'checked' : '' }}>
+                    <img src="{{ asset('images/Layer2.png') }}" width="16">
+                    <label>District Police Command</label>
                 </div>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="category" value="Police Station"
-                        {{ old('Police Station', $police->category ?? '') == 'Police Station' ? 'checked' : '' }}>
-                    <label class="form-check-label">Police Station</label>
+                <div class="form-check form-check-inline police-option {{ $police->category == 'Police Station' ? 'selected' : '' }}">
+                    <input class="form-check-input category-radio"
+                        type="radio"
+                        name="category"
+                        value="Police Station"
+                        data-icon="{{ asset('images/Layer3.png') }}"
+                        {{ $police->category == 'Police Station' ? 'checked' : '' }}>
+                    <img src="{{ asset('images/Layer3.png') }}" width="16">
+                    <label>Police Station</label>
                 </div>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="category" value="Police Post"
-                        {{ old('Police Post', $police->category ?? '') == 'Police Post' ? 'checked' : '' }}>
-                    <label class="form-check-label">Police Post</label>
+                 <div class="form-check form-check-inline police-option {{ $police->category == 'Police Post' ? 'selected' : '' }}">
+                    <input class="form-check-input category-radio"
+                        type="radio"
+                        name="category"
+                        value="Police Post"
+                        data-icon="{{ asset('images/Layer4.png') }}"
+                        {{ $police->category == 'Police Post' ? 'checked' : '' }}>
+                    <img src="{{ asset('images/Layer4.png') }}" width="16">
+                    <label>Police Post</label>
                 </div>
             </div>
         </div>
@@ -270,35 +261,43 @@
           </div>
         </div>
 
+       <div class="col-md-12">
+          <div class="card card-outline card-info">
+            <div class="card-header">
+              <h3 class="card-title">
+                Edit Nearest Airfields, Medical Facilities, Police, and Embassies
+              </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+                <textarea id="summernote6" name="nearest_medical_facility">
+                    <?php echo $police->nearest_medical_facility; ?>
+                </textarea>
+
+            </div>
+
+          </div>
+        </div>
+
         <div class="col-md-12">
-    <div class="form-group">
-        <label>Icon</label><br>
+          <div class="card card-outline card-info">
+            <div class="card-header">
+              <h3 class="card-title">
+                Edit Accommodation Search
+              </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
 
-        @php
-            $icons = [
-                ['url' => asset('images/dot-blue-ring-royal-papua.png'), 'label' => 'Royal Brunei Police Force (Police HQ)'],
-                ['url' => asset('images/dot-red.png'), 'label' => 'District Police Command'],
-                ['url' => asset('images/dot-orange-ppc.png'), 'label' => 'Police Station'],
-                ['url' => asset('images/dot-green.png'), 'label' => 'Police Post'],
-            ];
-        @endphp
+                <textarea id="summernote7" name="nearest_accommodation">
+                    <?php echo $police->nearest_accommodation; ?>
+                </textarea>
 
-        @foreach($icons as $icon)
-            <label style="margin-right: 15px; cursor:pointer;">
-                <input
-                    type="radio"
-                    name="icon"
-                    value="{{ $icon['url'] }}"
-                    {{ $police->icon == $icon['url'] ? 'checked' : '' }}
-                >
+            </div>
 
-                <img src="{{ $icon['url'] }}" style="width:17px; height:17px;">
-                {{ $icon['label'] }}
-            </label>
-        @endforeach
-
-    </div>
-</div>
+          </div>
+        </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
@@ -315,8 +314,30 @@
     $('#summernote3').summernote()
     $('#summernote4').summernote()
     $('#summernote5').summernote()
+    $('#summernote6').summernote()
+    $('#summernote7').summernote()
 
   })
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    document.querySelectorAll('.category-radio').forEach(radio => {
+
+        radio.addEventListener('change', function () {
+
+            document.getElementById('icon').value = this.dataset.icon;
+
+            document.querySelectorAll('.police-option')
+                .forEach(item => item.classList.remove('selected'));
+
+            this.closest('.police-option')
+                .classList.add('selected');
+        });
+
+    });
+
+});
 </script>
 <script>
     $('#province').on('change', function () {
@@ -327,7 +348,7 @@
                 type: 'GET',
                 success: function (data) {
                     $('#city').empty();
-                    $('#city').append('<option value="">-- Choosse Township --</option>');
+                    $('#city').append('<option value="">-- Mukims (sub-districts) --</option>');
                     $.each(data, function (key, city) {
                         $('#city').append('<option value="' + city.id + '">' + city.city + '</option>');
                     });
@@ -335,7 +356,7 @@
             });
         } else {
             $('#city').empty();
-            $('#city').append('<option value="">-- Choosse Township  --</option>');
+            $('#city').append('<option value="">-- Mukims (sub-districts) --</option>');
         }
     });
 </script>

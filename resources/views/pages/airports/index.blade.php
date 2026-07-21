@@ -555,7 +555,7 @@ const FilterPanel = L.Control.extend({
                         <input type="checkbox" name="airportClass" value="${c}"> ${c}
                     </label>`).join('')}
                 <hr>
-                <strong>Province</strong>
+                <strong>District</strong>
                 <div style="max-height:120px;overflow-y:auto;border:1px solid #ccc;padding:5px;border-radius:5px;margin-top:6px;">
                     @foreach ($provinces as $p)
                         <div class="form-check">

@@ -26,7 +26,14 @@ class PoliceController extends Controller
 
      public function filter(Request $request)
     {
-        $query = Police::query();
+        $query = Police::query()
+            ->leftJoin('cities', 'police.city_id', '=', 'cities.id')
+            ->leftJoin('provincesregions', 'police.province_id', '=', 'provincesregions.id')
+            ->select(
+                'police.*',
+                'cities.city as city_name',
+                'provincesregions.provinces_region as province_name'
+            );
 
         $query->where('police_status', true);
 
@@ -36,8 +43,8 @@ class PoliceController extends Controller
         });
 
         // 2. Filter by Category (case-insensitive search)
-        $query->when($request->filled('category'), function ($q) use ($request) {
-            $q->where('category', $request->input('category'));
+        $query->when($request->filled('categories'), function ($q) use ($request) {
+            $q->whereIn('category', (array) $request->categories);
         });
 
         // 3. Filter by Location (Address - case-insensitive search)
@@ -50,7 +57,7 @@ class PoliceController extends Controller
             // Ensure province IDs are an array and valid integers
             $provinceIds = array_filter((array) $request->input('provinces'), 'is_numeric');
             if (!empty($provinceIds)) {
-                $q->whereIn('province_id', $provinceIds);
+                $q->whereIn('police.province_id', $provinceIds);
             }
         });
 
@@ -132,8 +139,33 @@ class PoliceController extends Controller
 
 
         // Execute the query and return JSON response
-        $police = $query->get();
-        return response()->json($police);
+         $polices = $query->get();
+         $categoryCounts = [
+            'Royal Brunei Police Force (Police HQ)' => 0,
+            'District Police Command' => 0,
+            'Police Station' => 0,
+            'Police Post' => 0,
+        ];
+
+        foreach ($polices as $police) {
+
+            if (empty($police->category)) {
+                continue;
+            }
+
+            $cats = array_map('trim', explode(',', $police->category));
+
+            foreach ($cats as $cat) {
+                if (isset($categoryCounts[$cat])) {
+                    $categoryCounts[$cat]++;
+                }
+            }
+        }
+
+        return response()->json([
+            'polices' => $polices,
+            'categoryCounts' => $categoryCounts
+        ]);
     }
 
     public function showdetail($id)

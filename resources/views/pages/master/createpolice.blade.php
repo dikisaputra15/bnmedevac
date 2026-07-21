@@ -21,9 +21,9 @@
 
          <div class="col-md-12">
             <div class="form-group">
-                <label>Region</label>
+                <label>District</label>
                 <select class="form-control" name="province_id" id="province">
-                        <option value="0">-Choosse Region-</option>
+                        <option value="0">-Choose District-</option>
                     @foreach($provinces as $prov)
                         <option value="{{$prov->id}}">{{$prov->provinces_region}}</option>
                     @endforeach
@@ -33,9 +33,9 @@
 
          <div class="col-md-12">
             <div class="form-group">
-                <label for="city">Township</label>
+                <label for="city">Mukims (sub-districts)</label>
                 <select name="city" id="city" class="form-control">
-                    <option value="">-Choose Township-</option>
+                    <option value="">-Choose Mukims (sub-districts)-</option>
                 </select>
             </div>
         </div>
@@ -63,7 +63,7 @@
 
             <div class="col-md-12">
             <div class="form-group">
-                <label>Police Level</label><br>
+                <label>Police Classification (Global)</label><br>
 
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="level" value="Layer 1">
@@ -89,51 +89,30 @@
 
          <div class="col-md-12">
             <div class="form-group">
-                <label>Police Classification</label><br>
+                <label>Police Classification (Country)</label><br>
 
+                <input type="hidden" name="icon" id="icon">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="classification" value="National HQ">
-                    <label class="form-check-label">National HQ</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="classification" value="Regional / Macro Command">
-                    <label class="form-check-label">Regional / Macro Command</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="classification" value="Provincial / Territorial Command">
-                    <label class="form-check-label">Provincial / Territorial Command</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="classification" value="Local Police Station">
-                    <label class="form-check-label">Local Police Station</label>
-                </div>
-            </div>
-        </div>
-
-         <div class="col-md-12">
-            <div class="form-group">
-                <label>Police Category</label><br>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="category" value="Royal Brunei Police Force (Police HQ)">
+                    <input class="form-check-input category-radio" type="radio" name="category" value="Royal Brunei Police Force (Police HQ)" data-icon="{{ asset('images/Layer1.png') }}">
+                    <img src="{{ asset('images/Layer1.png') }}" style="width:12px; height:12px;">
                     <label class="form-check-label">Royal Brunei Police Force (Police HQ)</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="category" value="District Police Command">
+                    <input class="form-check-input category-radio" type="radio" name="category" value="District Police Command" data-icon="{{ asset('images/Layer2.png') }}">
+                    <img src="{{ asset('images/Layer2.png') }}" style="width:12px; height:12px;">
                     <label class="form-check-label">District Police Command</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="category" value="Police Station">
+                    <input class="form-check-input category-radio" type="radio" name="category" value="Police Station" data-icon="{{ asset('images/Layer3.png') }}">
+                    <img src="{{ asset('images/Layer3.png') }}" style="width:12px; height:12px;">
                     <label class="form-check-label">Police Station</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="category" value="Police Post">
+                    <input class="form-check-input category-radio" type="radio" name="category" value="Police Post" data-icon="{{ asset('images/Layer4.png') }}">
+                    <img src="{{ asset('images/Layer4.png') }}" style="width:12px; height:12px;">
                     <label class="form-check-label">Police Post</label>
                 </div>
             </div>
@@ -229,27 +208,40 @@
           </div>
         </div>
 
-        <div class="col-md-12">
-            <div class="form-group">
-                <label>Icon</label><br>
-
-                @php
-                    $icons = [
-                        ['url' => asset('images/dot-blue-ring-royal-papua.png'), 'label' => 'Royal Brunei Police Force (Police HQ)'],
-                        ['url' => asset('images/dot-red.png'), 'label' => 'District Police Command'],
-                        ['url' => asset('images/dot-orange-ppc.png'), 'label' => 'Police Station'],
-                        ['url' => asset('images/dot-green.png'), 'label' => 'Police Post'],
-                    ];
-                @endphp
-
-                @foreach($icons as $icon)
-                    <label style="margin-right: 15px;">
-                        <input type="radio" name="icon" value="{{ $icon['url'] }}">
-                        <img src="{{ $icon['url'] }}" style="width:17px; height:17px;">
-                        {{ $icon['label'] }}
-                    </label>
-                @endforeach
+         <div class="col-md-12">
+          <div class="card card-outline card-info">
+            <div class="card-header">
+              <h3 class="card-title">
+                Nearest Airfields, Medical Facilities, Police, and Embassies
+              </h3>
             </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+                <textarea id="summernote6" name="nearest_medical_facility">
+                </textarea>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="card card-outline card-info">
+            <div class="card-header">
+              <h3 class="card-title">
+                Accommodation Search
+              </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+                <textarea id="summernote7" name="nearest_accommodation">
+                </textarea>
+
+            </div>
+
+          </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -267,8 +259,18 @@
     $('#summernote3').summernote()
     $('#summernote4').summernote()
     $('#summernote5').summernote()
-
+    $('#summernote6').summernote()
+    $('#summernote7').summernote()
   })
+</script>
+<script>
+document.querySelectorAll('.category-radio').forEach(radio => {
+    radio.addEventListener('change', function() {
+
+        document.getElementById('icon').value = this.dataset.icon;
+
+    });
+});
 </script>
 <script>
     $('#province').on('change', function () {
@@ -279,7 +281,7 @@
                 type: 'GET',
                 success: function (data) {
                     $('#city').empty();
-                    $('#city').append('<option value="">-- Choosse Township --</option>');
+                    $('#city').append('<option value="">-- Choose Mukims (sub-districts) --</option>');
                     $.each(data, function (key, city) {
                         $('#city').append('<option value="' + city.id + '">' + city.city + '</option>');
                     });
@@ -287,7 +289,7 @@
             });
         } else {
             $('#city').empty();
-            $('#city').append('<option value="">-- Choosse Township  --</option>');
+            $('#city').append('<option value="">-- Choose Mukims (sub-districts) --</option>');
         }
     });
 </script>

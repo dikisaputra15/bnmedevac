@@ -501,7 +501,7 @@ function addHospitalMarkers(data) {
             <strong>Country Classification:</strong> ${h.facility_level || 'N/A'}<br>
             <strong>Address:</strong> ${h.address || 'N/A'}<br>
             <strong>Coords:</strong> ${h.latitude}, ${h.longitude}<br>
-            <strong>Province:</strong> ${h.provinces_region || 'N/A'}<br>
+            <strong>District:</strong> ${h.provinces_region || 'N/A'}<br>
             ${h.id ? `<a href="/hospitals/${h.id}" class="btn btn-primary btn-sm mt-2" style="color:white;">Read More</a>` : ''}
         `);
     });
@@ -590,7 +590,7 @@ const FilterPanel = L.Control.extend({
                         <input type="checkbox" name="hospitalLevel" value="${c}"> ${c}
                     </label>`).join('')}
                 <hr>
-                <strong>Province</strong>
+                <strong>District</strong>
                 <div style="max-height:120px;overflow-y:auto;border:1px solid #ccc;padding:5px;border-radius:5px;margin-top:6px;">
                     @foreach ($provinces as $p)
                         <div class="form-check">
