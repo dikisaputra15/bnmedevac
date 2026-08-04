@@ -65,17 +65,11 @@
             <div class="form-group">
                 <label>Facility Level</label>
                 <select class="form-control" name="facility_level">
-                    <option value="Class A">
-                        Class A
+                    <option value="Tertiary">
+                        Tertiary
                     </option>
-                    <option value="Class B">
-                        Class B
-                    </option>
-                    <option value="Class C">
-                        Class C
-                    </option>
-                    <option value="Class D">
-                        Class D
+                    <option value="Secondary">
+                        Secondary
                     </option>
                     <option value="Clinic / Health Center">
                         Clinic / Health Center

@@ -88,19 +88,13 @@
             <div class="form-group">
                 <label>Edit Facility Level</label>
                 <select class="form-control" name="facility_level">
-                    <option value="Class A" {{ old('facility_level', $hospital->facility_level ?? '') == 'Class A' ? 'selected' : '' }}>
-                        Class A
+                    <option value="Tertiary" {{ old('facility_level', $hospital->facility_level ?? '') == 'Tertiary' ? 'selected' : '' }}>
+                        Tertiary
                     </option>
-                    <option value="Class B" {{ old('facility_level', $hospital->facility_level ?? '') == 'Class B' ? 'selected' : '' }}>
-                        Class B
+                    <option value="Secondary" {{ old('facility_level', $hospital->facility_level ?? '') == 'Secondary' ? 'selected' : '' }}>
+                        Secondary
                     </option>
-                    <option value="Class C" {{ old('facility_level', $hospital->facility_level ?? '') == 'Class C' ? 'selected' : '' }}>
-                        Class C
-                    </option>
-                    <option value="Class D" {{ old('facility_level', $hospital->facility_level ?? '') == 'Class D' ? 'selected' : '' }}>
-                        Class D
-                    </option>
-                    <option value="Clinic / Health Center" {{ old('facility_level', $hospital->facility_level ?? '') == 'Public Health Center (PUSKESMAS)' ? 'selected' : '' }}>
+                    <option value="Clinic / Health Center" {{ old('facility_level', $hospital->facility_level ?? '') == 'Clinic / Health Center' ? 'selected' : '' }}>
                         Clinic / Health Center
                     </option>
                 </select>
