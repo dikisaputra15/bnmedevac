@@ -205,6 +205,72 @@
             border-color: #1a73e8 !important;
             box-shadow: 0 0 0 2px rgba(26,115,232,0.2) !important;
         }
+    #police1Modal .modal-dialog,
+    #police2Modal .modal-dialog,
+    #police3Modal .modal-dialog,
+    #police4Modal .modal-dialog {
+        width: calc(100% - 32px);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #cmdFlowModal .modal-dialog {
+        width: calc(100% - 32px);
+        max-width: 1200px;
+        margin: 16px auto;
+        min-height: calc(100% - 32px);
+    }
+    #cmdFlowModal .modal-content {
+        max-height: calc(100vh - 32px);
+        overflow: hidden;
+    }
+    #cmdFlowModal .modal-header {
+        flex-shrink: 0;
+    }
+    #cmdFlowModal .modal-header .d-flex {
+        gap: 8px;
+    }
+    #cmdFlowModal .image-modal-body {
+        min-height: 0;
+        padding: 12px;
+        overflow-y: auto;
+    }
+    #cmdFlowModal .image-modal-body img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: calc(100vh - 120px);
+        object-fit: contain;
+        margin: 0 auto;
+    }
+    #policeAreaLayerModal .modal-dialog {
+        width: calc(100% - 32px);
+        max-width: 1600px;
+        margin: 16px auto;
+        min-height: calc(100% - 32px);
+    }
+    #policeAreaLayerModal .modal-content {
+        max-height: calc(100vh - 32px);
+        overflow: hidden;
+    }
+    #policeAreaLayerModal .modal-header {
+        flex-shrink: 0;
+    }
+    #policeAreaLayerModal .modal-header .d-flex {
+        gap: 8px;
+    }
+    #policeAreaLayerModal .modal-body {
+        padding: 0;
+        min-height: 0;
+        overflow-y: auto;
+    }
+    #policeAreaLayerModal iframe {
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+    }
 </style>
 @endpush
 
@@ -257,24 +323,36 @@
             <div class="d-flex align-items-center gap-3">
                 <span class="fw-bold me-2">Map Legend:</span>
 
-                <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#level6Modal">
+                <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#police4Modal">
                     <img src="{{ asset('images/Layer1.png') }}" style="width:15px; height:15px;">
-                    <small>Royal Brunei Police Force (Police HQ)</small>
+                    <small>National Police (HQ)</small>
                 </button>
 
-                <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#level5Modal">
+                <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#police3Modal">
                     <img src="{{ asset('images/Layer2.png') }}" style="width:15px; height:15px;">
                     <small>District Police Command</small>
                 </button>
 
-                <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#level4Modal">
+                <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#police2Modal">
                     <img src="{{ asset('images/Layer3.png') }}" style="width:15px; height:15px;">
                     <small>Police Station</small>
                 </button>
 
-                <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#level3Modal">
+                <button class="btn p-1" data-bs-toggle="modal" data-bs-target="#police1Modal">
                     <img src="{{ asset('images/Layer4.png') }}" style="width:15px; height:15px;">
                     <small>Police Post</small>
+                </button>
+
+                <button type="button" class="btn btn-danger d-flex flex-column align-items-center p-3 {{ request()->is('hospital') ? 'active' : '' }}"
+                    data-bs-toggle="modal" data-bs-target="#policeAreaLayerModal">
+                <img src="{{ asset('images/icon-structure.png') }}" style="width: 20px; height: 20px;">
+                    <small>Police Area Layer</small>
+                </button>
+
+               <button type="button" class="btn btn-danger d-flex flex-column align-items-center p-3 {{ request()->is('hospital') ? 'active' : '' }}"
+                    data-bs-toggle="modal" data-bs-target="#cmdFlowModal">
+                <img src="{{ asset('images/icon-flow.png') }}" style="width: 20px; height: 20px;">
+                    <small>Cmd Flow</small>
                 </button>
 
             </div>
@@ -298,69 +376,224 @@
   </div>
 </div>
 
-<div class="modal fade" id="level3Modal" tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
+<div class="modal fade" id="police1Modal" tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="d-flex align-items-center">
-             <img src="{{ asset('images/Layer4.png') }}" style="width:15px; height:15px;">
+        <div class="d-flex align-items-center" style="gap:8px;">
+            <img src="{{ asset('images/Layer4.png') }}" style="width:15px; height:15px;">
             <h5 class="modal-title" id="disclaimerLabel">Police Post</h5>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
+        <p><strong>Command level:</strong> Lowest level of territorial police command</p>
+        <p><strong>Administrative Equivalent:</strong> Village (Kampong) / Community / Strategic Facility</p>
+        <p><strong>Typical Head Rank:</strong> Sergeant, Corporal, or Junior Police Officer (under supervision of a Police Station)</p>
+        <p>Provides a permanent police presence in villages, remote communities, border areas, transportation hubs, and other strategic locations by supporting frontline policing, community engagement, and security monitoring under the supervision of a parent police station.</p>
+        <p><strong>Responsibilities:</strong></p>
+        <ul>
+          <li>Provide a permanent police presence in villages, remote communities, transportation nodes, or strategic facilities.</li>
+          <li>Conduct observation and surveillance of local security conditions.</li>
+          <li>Receive public reports and relay information to the parent police station.</li>
+          <li>Support community policing and public engagement activities.</li>
+          <li>Assist with access control and security at designated facilities.</li>
+          <li>Conduct visibility patrols and deterrence operations.</li>
+          <li>Monitor local crime trends and suspicious activities.</li>
+          <li>Support roadblocks, checkpoints, and special security operations when required.</li>
+          <li>Provide first-response capability pending arrival of station personnel.</li>
+          <li>Assist district and station commanders during emergencies, disasters, and public-order incidents.</li>
+          <li>Support search-and-rescue and humanitarian operations when directed.</li>
+          <li>Enhance police accessibility and public reassurance in geographically dispersed communities.</li>
+        </ul>
+        <p>Police Guard Posts constitute the lowest territorial echelon of the RBPF and extend policing services into areas where maintaining a full police station would be operationally unnecessary or impractical. They play an important role in community policing, early incident reporting, and maintaining a visible law-enforcement presence throughout Brunei Darussalam.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="level4Modal" tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
+<div class="modal fade" id="police2Modal" tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center" style="gap:8px;">
             <img src="{{ asset('images/Layer3.png') }}" style="width:15px; height:15px;">
             <h5 class="modal-title" id="disclaimerLabel">Police Station</h5>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
+        <p><strong>Command level:</strong> Third-tier territorial police command</p>
+        <p><strong>Administrative Equivalent:</strong> Mukim (Sub-district) / Local Policing Area</p>
+        <p><strong>Typical Head Rank:</strong> Inspector or Assistant Superintendent of Police (ASP)</p>
+        <p>Represents the primary local operational unit of the RBPF, delivering frontline policing services, criminal investigation, emergency response, and community engagement within an assigned policing jurisdiction.</p>
+        <p><strong>Responsibilities:</strong></p>
+        <ul>
+          <li>Provide frontline law-enforcement services within the assigned station area.</li>
+          <li>Respond to emergency calls and public complaints.</li>
+          <li>Conduct routine patrols and crime-prevention activities.</li>
+          <li>Investigate minor and medium-level criminal offenses.</li>
+          <li>Maintain public order and community safety.</li>
+          <li>Enforce traffic regulations and local bylaws.</li>
+          <li>Support district-level operations and special enforcement campaigns.</li>
+          <li>Coordinate with local government authorities, village heads (<em>Ketua Kampung</em>), and community organizations.</li>
+          <li>Maintain police records, incident reports, and criminal intelligence relevant to the station area.</li>
+          <li>Serve as the primary point of contact between the RBPF and the local community.</li>
+          <li>Promote community policing and public confidence in law enforcement.</li>
+          <li>Provide initial investigative and victim-support services before referral to specialized units when necessary.</li>
+        </ul>
+        <p>Police stations represent the principal operational interface between the RBPF and the public, implementing national policing policies while addressing local public-safety concerns.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="level5Modal" tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
+<div class="modal fade" id="police3Modal" tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center" style="gap:8px;">
             <img src="{{ asset('images/Layer2.png') }}" style="width:15px; height:15px;">
             <h5 class="modal-title" id="disclaimerLabel">District Police Command</h5>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <p><strong>Command level:</strong> Second-tier territorial police command</p>
+        <p><strong>Administrative Equivalent:</strong> District level</p>
 
+        <p><strong>1. Brunei-Muara District Police</strong></p>
+        <p><strong>Typical Head Rank:</strong> Senior Superintendent or Superintendent (Commanding Officer of District Police)</p>
+        <p>Provides comprehensive territorial policing, crime prevention, public-order management, and security services throughout Brunei-Muara District, including the national capital and principal government institutions.</p>
+        <p><strong>Responsibilities:</strong></p>
+        <ul>
+          <li>General policing and crime prevention.</li>
+          <li>Public-order management in the national capital.</li>
+          <li>Traffic enforcement in the country's most densely populated district.</li>
+          <li>Security for government institutions, diplomatic facilities, and major public events.</li>
+          <li>Coordination with the Crime Investigation Department (CID) and Criminal Intelligence Department on major criminal investigations.</li>
+          <li>Community policing and public engagement initiatives.</li>
+          <li>Emergency response and incident management.</li>
+          <li>Support for national ceremonial and state security operations.</li>
+        </ul>
+        <p>Because Brunei-Muara contains the capital city and most of the national population, it is generally the most operationally active district.</p>
+
+        <p><strong>2. Belait District Police</strong></p>
+        <p><strong>Typical Head Rank:</strong> Superintendent</p>
+        <p>Provides territorial policing and public-security services across Belait District, with particular emphasis on protecting Brunei's petroleum industry and critical economic infrastructure.</p>
+        <p><strong>Responsibilities:</strong></p>
+        <ul>
+          <li>Territorial policing across Brunei's principal oil and gas region.</li>
+          <li>Protection of critical economic infrastructure.</li>
+          <li>Crime investigation and patrol operations.</li>
+          <li>Traffic enforcement and road-safety operations.</li>
+          <li>Cooperation with industrial stakeholders and local communities.</li>
+          <li>Crime prevention through high-visibility patrols.</li>
+          <li>Emergency-response coordination.</li>
+          <li>Support for industrial-security operations and major public events.</li>
+        </ul>
+        <p>Belait's strategic significance stems from its concentration of petroleum facilities and industrial assets.</p>
+
+        <p><strong>3. Tutong District Police</strong></p>
+        <p><strong>Typical Head Rank:</strong> Superintendent</p>
+        <p>Conducts territorial policing, rural law enforcement, community policing, and highway safety operations throughout Tutong District.</p>
+        <p><strong>Responsibilities:</strong></p>
+        <ul>
+          <li>Community policing and rural patrol operations.</li>
+          <li>Highway enforcement, particularly along the Muara–Tutong corridor.</li>
+          <li>Criminal investigation and public-safety operations.</li>
+          <li>Support for national policing initiatives and training activities.</li>
+          <li>Traffic management and accident response.</li>
+          <li>Crime prevention and public education programs.</li>
+          <li>Coordination with local authorities and community organizations.</li>
+          <li>Support for special police operations when required.</li>
+        </ul>
+        <p>Tutong District frequently conducts roadblocks and traffic-enforcement operations and is also home to major police training facilities.</p>
+
+        <p><strong>4. Temburong District Police</strong></p>
+        <p><strong>Typical Head Rank:</strong> Superintendent</p>
+        <p>Provides territorial policing, border-security support, rural law enforcement, and riverine policing throughout Temburong District.</p>
+        <p><strong>Responsibilities:</strong></p>
+        <ul>
+          <li>Border-security support and anti-smuggling operations.</li>
+          <li>Rural and riverine policing.</li>
+          <li>Community engagement in remote localities.</li>
+          <li>Patrol and surveillance operations.</li>
+          <li>Coordination with customs and other enforcement agencies.</li>
+          <li>Crime prevention in isolated communities.</li>
+          <li>Emergency-response coordination.</li>
+          <li>Support for national border-security initiatives.</li>
+        </ul>
+        <p>Given Temburong's geographical separation from the rest of Brunei, the district police play an important role in border monitoring and anti-contraband enforcement.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="level6Modal" tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
+<div class="modal fade" id="police4Modal" tabindex="-1" aria-labelledby="disclaimerLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center" style="gap:8px;">
             <img src="{{ asset('images/Layer1.png') }}" style="width:15px; height:15px;">
-            <h5 class="modal-title" id="disclaimerLabel">Royal Brunei Police Force (Police HQ)</h5>
+            <h5 class="modal-title" id="disclaimerLabel">National Police (HQ)</h5>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <p><strong>Command level:</strong> Top territorial police command</p>
+        <p><strong>Administrative Equivalent:</strong> National level</p>
+        <p><strong>Typical Head Rank:</strong> Commissioner of Police</p>
+        <p>Functions as the national command and administrative headquarters of the RBPF, providing strategic leadership, operational coordination, policy development, and organizational oversight for all functional departments and territorial police formations.</p>
+        <p><strong>Responsibilities:</strong></p>
+        <ul>
+          <li>National command and coordination.</li>
+          <li>Strategic policy implementation.</li>
+          <li>Resource management.</li>
+          <li>Operational oversight of all territorial formations.</li>
+          <li>Coordination of specialized departments.</li>
+          <li>National intelligence integration.</li>
+          <li>Strategic planning and organizational development.</li>
+          <li>Coordination with the Ministry of Home Affairs and other government agencies.</li>
+          <li>International police cooperation and liaison.</li>
+          <li>National crisis management and emergency coordination.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
+<div class="modal fade" id="policeAreaLayerModal" tabindex="-1" aria-labelledby="policeAreaLayerLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header py-2">
+        <div class="d-flex align-items-center gap-2">
+            <img src="{{ asset('images/icon-structure.png') }}" style="width:18px; height:18px;">
+            <h5 class="modal-title mb-0" id="policeAreaLayerLabel">Police Area Layer</h5>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe src="{{ asset('police-territorial-areas.html') }}"
+                title="Royal Brunei Police Force territorial areas and administrative equivalents"
+                loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="cmdFlowModal" tabindex="-1" aria-labelledby="cmdFlowLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered image-modal-dialog" style="--img-ratio:1.5;">
+    <div class="modal-content">
+      <div class="modal-header py-2">
+        <div class="d-flex align-items-center gap-2">
+            <img src="{{ asset('images/icon-flow.png') }}" style="width:18px; height:18px;">
+            <h5 class="modal-title mb-0" id="cmdFlowLabel">Command Flow</h5>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body image-modal-body">
+            <img src="{{ asset('images/cmd-flow.png') }}" alt="Police Command Flow">
       </div>
     </div>
   </div>
@@ -415,6 +648,34 @@
 @endsection
 
 @push('service')
+<script>
+(() => {
+    const modal = document.getElementById('policeAreaLayerModal');
+    const frame = modal.querySelector('iframe');
+    let observer;
+
+    function fitAreaLayerContent() {
+        if (!modal.getClientRects().length) return;
+        const body = frame.contentDocument?.body;
+        if (!body) return;
+        // Body height follows the document content, without the iframe viewport minimum.
+        frame.style.height = Math.ceil(body.getBoundingClientRect().height) + 'px';
+    }
+
+    function observeAreaLayerContent() {
+        observer?.disconnect();
+        const body = frame.contentDocument?.body;
+        if (!body) return;
+        observer = new ResizeObserver(fitAreaLayerContent);
+        observer.observe(body);
+        fitAreaLayerContent();
+    }
+
+    frame.addEventListener('load', observeAreaLayerContent);
+    modal.addEventListener('shown.bs.modal', observeAreaLayerContent);
+    window.addEventListener('resize', fitAreaLayerContent);
+})();
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCd-WVlGgZFJwAtPZkbAEca2Np6OI7CBTM&libraries=places,geometry,drawing"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1118,7 +1379,7 @@ combinedPanelDiv.innerHTML = `
             </select>
             <label>Category:</label>
             ${[
-                'Royal Brunei Police Force (Police HQ)',
+                'National Police (HQ)',
                 'District Police Command',
                 'Police Station',
                 'Police Post',

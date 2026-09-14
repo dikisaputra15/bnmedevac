@@ -120,15 +120,15 @@
                 <label>Edit Police Classification (Country)</label><br>
 
                 <input type="hidden" name="icon" id="icon" value="{{ $police->icon }}">
-               <div class="form-check form-check-inline police-option {{ $police->category == 'Royal Brunei Police Force (Police HQ)' ? 'selected' : '' }}">
+               <div class="form-check form-check-inline police-option {{ $police->category == 'National Police (HQ)' ? 'selected' : '' }}">
                     <input class="form-check-input category-radio"
                         type="radio"
                         name="category"
-                        value="Royal Brunei Police Force (Police HQ)"
+                        value="National Police (HQ)"
                         data-icon="{{ asset('images/Layer1.png') }}"
-                        {{ $police->category == 'Royal Brunei Police Force (Police HQ)' ? 'checked' : '' }}>
+                        {{ $police->category == 'National Police (HQ)' ? 'checked' : '' }}>
                     <img src="{{ asset('images/Layer1.png') }}" width="16">
-                    <label>Royal Brunei Police Force (Police HQ)</label>
+                    <label>National Police (HQ)</label>
                 </div>
 
                  <div class="form-check form-check-inline police-option {{ $police->category == 'District Police Command' ? 'selected' : '' }}">

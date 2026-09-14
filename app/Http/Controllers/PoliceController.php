@@ -144,7 +144,7 @@ class PoliceController extends Controller
         // Execute the query and return JSON response
          $polices = $query->get();
          $categoryCounts = [
-            'Royal Brunei Police Force (Police HQ)' => 0,
+            'National Police (HQ)' => 0,
             'District Police Command' => 0,
             'Police Station' => 0,
             'Police Post' => 0,
